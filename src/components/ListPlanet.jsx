@@ -3,21 +3,21 @@ import axios from 'axios'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class ListPlanet extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
 
-      data: []
-    }
-  }
+  //     data: []
+  //   }
+  // }
 
   fetchDataPlanet() {
     axios.get('https://swapi.co/api/planets/')
       .then(response => {
-        this.setState({ data: response.data.results })
-        console.log(this.state.data)
+        this.props.getData(response.data.results)
       })
       .catch(err => {
         console.log(err);
@@ -27,9 +27,7 @@ class ListPlanet extends Component {
   componentDidMount() {
     this.fetchDataPlanet()
   }
-
   
-
   render() {
     const columns = [
 
@@ -65,7 +63,7 @@ class ListPlanet extends Component {
         <center>
           <div style={{ width: '85%' }}>
             <ReactTable
-              data={this.state.data}
+              data={this.props.data}
               columns={columns}
               defaultPageSize={5}
               className="-striped -highlight"
@@ -76,9 +74,18 @@ class ListPlanet extends Component {
       </div>
     )
   }
-
-
 }
 
-export default ListPlanet
 
+const mapStateToProps = state => ({
+      data: state.data
+})
+
+const mapDispatchToProps = (dispatch) =>({
+  getData: (data) => dispatch({
+    type: 'GET_DATA',
+    payload: data
+  }) 
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListPlanet);

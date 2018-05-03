@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-class ListPlanet extends Component {
+class DefaultPlanet extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -99,5 +99,5 @@ class ListPlanet extends Component {
 
 }
 
-export default ListPlanet
+export default DefaultPlanet
 
