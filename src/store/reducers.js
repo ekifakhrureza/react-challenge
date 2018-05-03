@@ -1,4 +1,4 @@
-import { GET_DATA, GET_DETAIL } from './actionTypes'
+import { GET_DATA, GET_DETAIL, CLEAR_DATA } from './actionTypes'
 
 const initialState = []
 
@@ -8,6 +8,8 @@ const reducers = (state = initialState, action) => {
             return [...action.payload]
         case GET_DETAIL:
             return [...action.payload]
+        case CLEAR_DATA:
+            return initialState    
         default:
             return state;
     }

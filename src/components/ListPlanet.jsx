@@ -21,6 +21,10 @@ class ListPlanet extends Component {
     this.fetchDataPlanet()
   }
 
+  componentWillMount() {
+    this.props.clearData()
+  }
+
   render() {
     const columns = [
 
@@ -77,6 +81,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   getData: (data) => dispatch({
     type: 'GET_DATA',
+    payload: data
+  }),
+  clearData: (data) => dispatch({
+    type: 'CLEAR_DATA',
     payload: data
   })
 })

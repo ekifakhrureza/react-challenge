@@ -8,7 +8,7 @@ class DetailPlanet extends Component {
   fetchDataPlanet() {
     axios.get(`https://swapi.co/api/planets/${this.props.match.params.id}`)
       .then(response => {
-        this.props.getData([response.data])
+        this.props.getDetail([response.data])
       })
       .catch(err => {
         console.log(err)
@@ -18,6 +18,11 @@ class DetailPlanet extends Component {
   componentDidMount() {
     this.fetchDataPlanet()
   }
+
+  componentWillMount() {
+    this.props.clearData()
+  }
+
 
   render() {
     return (
@@ -95,8 +100,12 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getData: (data) => dispatch({
+  getDetail: (data) => dispatch({
     type: 'GET_DETAIL',
+    payload: data
+  }),
+  clearData: (data) => dispatch({
+    type: 'CLEAR_DATA',
     payload: data
   })
 })
