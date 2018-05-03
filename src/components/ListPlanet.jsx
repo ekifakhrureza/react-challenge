@@ -6,13 +6,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class ListPlanet extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-
-  //     data: []
-  //   }
-  // }
 
   fetchDataPlanet() {
     axios.get('https://swapi.co/api/planets/')
@@ -27,7 +20,7 @@ class ListPlanet extends Component {
   componentDidMount() {
     this.fetchDataPlanet()
   }
-  
+
   render() {
     const columns = [
 
@@ -53,7 +46,7 @@ class ListPlanet extends Component {
         Header: 'Details',
         accessor: 'url',
         Cell: value =>
-          <Link to={`/${value.row.url.substring(value.row.url.length-2)}`}><button type="button" className="btn btn-warning">See More</button></Link>
+          <Link to={`/${value.row.url.substring(value.row.url.length - 2)}`}><button type="button" className="btn btn-warning">See More</button></Link>
 
       }
     ]
@@ -78,14 +71,14 @@ class ListPlanet extends Component {
 
 
 const mapStateToProps = state => ({
-      data: state.data
+  data: state.data
 })
 
-const mapDispatchToProps = (dispatch) =>({
+const mapDispatchToProps = (dispatch) => ({
   getData: (data) => dispatch({
     type: 'GET_DATA',
     payload: data
-  }) 
+  })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListPlanet);
